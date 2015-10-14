@@ -17,17 +17,19 @@ router.get('/:username', function(req, res){
 		//console.log(data.Slideshow.DownloadUrl[0]);
 		//res.json(data.User.Slideshow);
 		var result = [], result_count = 0;
-		for (var i=0; i<data.User.Slideshow.length; i++){
-			var item = data.User.Slideshow[i];
-			if (item.DownloadUrl){
-				console.log(item);
-				result[result_count] = {
-						id: item.ID[0],
-						thumbnail: "http:" + item.ThumbnailURL[0],
-						title: item.Title[0]
-				};
-				
-				result_count ++;
+		if (data.User.Slideshow){
+			for (var i=0; i<data.User.Slideshow.length; i++){
+				var item = data.User.Slideshow[i];
+				if (item.DownloadUrl){
+					console.log(item);
+					result[result_count] = {
+							id: item.ID[0],
+							thumbnail: "http:" + item.ThumbnailURL[0],
+							title: item.Title[0]
+					};
+					
+					result_count ++;
+				}
 			}
 		}
 		res.json(result);
